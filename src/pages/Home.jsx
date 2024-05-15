@@ -15,7 +15,7 @@ const Home = () => {
 
   const getProducts = async () =>{
     try {
-        const res = await productInstance.get()
+        const res = await productInstance.get('/?limit=10&skip=10&select=title,price,thumbnail,description')
         const productsData = res.data.products;
         setProducts(productsData);
         console.log(products)
@@ -30,6 +30,7 @@ const Home = () => {
     {products.map((data) => (
         <ProductCard
           key={data.id}
+          id={data.id}
           name={data.title}
           price={data.price}
           image={data.thumbnail}
