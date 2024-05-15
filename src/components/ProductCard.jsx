@@ -1,14 +1,15 @@
 /* eslint-disable react/prop-types */
-import { FaPlus } from "react-icons/fa";
 import "../styles/product-card.css"
+import { useNavigate } from "react-router-dom";
 
 const ProductCard = ({
   name,
   description,
   price,
   image,
-
+  id
 }) => {
+  const navigate = useNavigate();
   return (
     <div className="product-card">
       <img src={`${image}`} alt={name} />
@@ -17,8 +18,8 @@ const ProductCard = ({
       <span>₹{price}</span>
 
       <div>
-        <button>
-          <FaPlus />
+        <button onClick={()=>navigate(`/${id}`)}>
+          Detail
         </button>
       </div>
     </div>
