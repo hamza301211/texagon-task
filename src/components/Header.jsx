@@ -1,0 +1,45 @@
+import  { useState } from 'react'
+import { FaShoppingBag, FaSignInAlt, FaSignOutAlt, FaUser } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
+import "../styles/header.css"
+
+const user = {_id:'sff',role:'user'}
+
+const Header = () => {
+    const [isOpen,setisOpen] = useState(false);
+
+    const logoutHandler = () =>{
+        setisOpen(false);
+    }
+  return (
+    <nav className='header'>
+        <Link onClick={() => setisOpen(false)} to={"/"}>Home</Link>
+        <Link onClick={() => setisOpen(false)} to={"/cart"}><FaShoppingBag/></Link>
+
+        {
+            user?._id ? (
+                <>
+                <button onClick={() => setisOpen((prev)=> !prev)}>
+                <FaUser/>
+                </button>
+                <dialog open={isOpen}>
+                    <div>
+                        {
+                            user?.role==="admin" && (
+                                <Link onClick={() => setisOpen(false)} to={"/admin/dashboard"}>Admin</Link>
+                            )
+                        }
+                        <button onClick={logoutHandler}><FaSignOutAlt/></button>
+                    </div>
+                </dialog>
+                </>
+            ):
+            <Link to={"/login"}>
+                <FaSignInAlt/>
+            </Link>
+        }
+    </nav>
+  )
+}
+
+export default Header

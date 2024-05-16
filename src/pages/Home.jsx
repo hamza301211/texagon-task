@@ -2,12 +2,14 @@ import ProductCard from "../components/ProductCard"
 import productInstance from "../axios/productsInstance"
 import { useEffect, useState } from "react"
 import "../styles/home.css"
+import Loader from "../components/Loader"
 
 
 
 
 const Home = () => {
   const [products,setProducts] = useState([]);
+  const [loading,setLoading] = useState();
 
   useEffect(()=>{
       getProducts();
@@ -15,16 +17,20 @@ const Home = () => {
 
   const getProducts = async () =>{
     try {
+        setLoading(true);
         const res = await productInstance.get('/?limit=10&skip=10&select=title,price,thumbnail,description')
         const productsData = res.data.products;
         setProducts(productsData);
-        console.log(products)
+        setLoading(false);
     } catch (error) {
       console.log(error);
     }
   }
   return (
-    <div className="product-container">
+  <>
+    {
+      loading ? <Loader/>:
+      <div className="product-container">
     <h1>Products</h1>
     <div className="product-grid">
     {products.map((data) => (
@@ -39,6 +45,8 @@ const Home = () => {
       ))}
       </div>
     </div>
+    }
+  </>
   )
 }
 
