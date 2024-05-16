@@ -2,10 +2,11 @@ import { useEffect, useState } from "react"
 import productInstance from "../axios/productsInstance"
 import { Link, useParams } from "react-router-dom"
 import CartItem from "../components/CartItem"
+import "../styles/cart-item.css"
 
 
 
-const ProductDetail = () => {
+const CartDetail = () => {
     const [product,setProduct] = useState({})
     const {id} = useParams();
 
@@ -40,4 +41,4 @@ const ProductDetail = () => {
   )
 }
 
-export default ProductDetail
+export default CartDetail
