@@ -7,6 +7,7 @@ import Header from './components/Header'
 
 const Home = lazy(()=> import("./pages/Home"))
 const ProductDetail = lazy(()=> import("./pages/ProductDetail"))
+const CartDetail = lazy(()=> import("./pages/CartDetail"))
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
     <Routes>
       <Route path='/' element={<Home/>}/>
       <Route path='/:id' element={<ProductDetail/>}/>
+      <Route path='/cart' element={<CartDetail/>}/>
     </Routes>
     </Suspense>
    </Router>
